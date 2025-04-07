@@ -1,0 +1,15 @@
+
+DATA_FILE="$HOME/software/mydata.txt"
+SEARCH_PATTERN=".*"
+if [ $# -eq 0 ]; then 
+echo "Usage : phone searchfor [...searchfor]
+(You didn't tell me what you want to search for.)"
+else
+	for arg in "$@"; do
+		if [ -n "$SEARCH_PATTERN" ]; then
+		SEARCH_PATTERN="$SEARCH_PATTERN.*$arg.*"
+		fi
+	done	
+
+grep -i "$SEARCH_PATTERN" "$DATA_FILE" |  awk -f display.awk
+fi
